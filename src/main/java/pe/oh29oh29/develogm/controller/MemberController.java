@@ -30,14 +30,19 @@ public class MemberController {
         return null;
     }
 
-    @GetMapping("my-info")
+    @GetMapping("/my-info")
     public String myInfoView() {
         return "html/member/myInfo";
     }
 
-    @PatchMapping("my-info")
+    @PatchMapping("/my-info")
     public String updateMyInfo() {
         return "html/member/myInfo";
+    }
+
+    @GetMapping("/checkDuplicatedId")
+    public String checkDuplicatedId() {
+        return null;
     }
 
 }
