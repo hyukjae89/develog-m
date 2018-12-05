@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>oh29oh29 - 기술블로그</title>
-    <link th:href="@{/css/initialization.css}" rel="stylesheet">
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/member/signUp.css}" rel="stylesheet">
 </head>
 <body>
-    <div class="main-section-wrap">
-
-    </div>
+    <th:block th:include="html/header"></th:block>
+    <section>
+        <div class="sign-up-wrap">
+            <input type="text" id="id" class="input-text-box" name="id" placeholder="ID">
+            <input type="password" id="password" class="input-text-box" name="password" placeholder="PASSWORD">
+            <input type="password" id="passwordConfirm" class="input-text-box" placeholder="PASSWORD 확인">
+        </div>
+    </section>
 </body>
 </html>

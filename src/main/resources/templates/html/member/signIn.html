@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>oh29oh29 - 기술블로그</title>
-    <link th:href="@{/css/initialization.css}" rel="stylesheet">
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/member/signIn.css}" rel="stylesheet">
 </head>
 <body>
-    <div class="main-section-wrap">
+    <th:block th:include="html/header"></th:block>
+    <section>
 
 
-    </div>
+    </section>
 </body>
 </html>
