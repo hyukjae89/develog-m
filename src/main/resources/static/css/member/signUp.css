@@ -2,9 +2,24 @@
     width: 500px;
     margin: 0 auto;
 }
-.input-text-box {
-    width: 470px;
+.sign-up-form {
+
+}
+.sign-up-box {
     line-height: 40px;
+}
+.input-text {
+    width: 466px;
     font-size: 16px;
     padding: 0 15px;
+}
+.submit-btn {
+    width: 500px;
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: green;
+}
+.submit-btn:focus {
+    background-color: gray;
 }

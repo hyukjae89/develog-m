@@ -8,7 +8,9 @@ header {
     display: inline-block;
     line-height: 60px;
     margin: 0 0 0 20px;
-    cursor: pointer;
+}
+.logo-link {
+
 }
 .logo-text:first-child {
     font-size: 25px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>oh29oh29 - 기술블로그</title>
@@ -11,12 +11,15 @@
     <th:block th:include="html/header"></th:block>
     <section>
         <div class="sign-up-wrap">
-            <input type="text" id="id" class="input-text-box" name="id" placeholder="ID">
-            <input type="password" id="password" class="input-text-box" name="password" placeholder="비밀번호">
-            <input type="password" id="passwordConfirm" class="input-text-box" placeholder="비밀번호 확인">
-            <input type="text" id="name" class="input-text-box" name="name" placeholder="이름 (닉네임)">
-            <input type="text" id="email" class="input-text-box" name="email" placeholder="E-mail">
-            <input type="text" id="certNumber" class="input-text-box" name="certNumber" placeholder="인증번호">
+            <form class="sign-up-form">
+                <input type="text" id="id" class="sign-up-box input-text" name="id" placeholder="ID">
+                <input type="password" id="password" class="sign-up-box input-text" name="password" placeholder="비밀번호">
+                <input type="password" id="passwordConfirm" class="sign-up-box input-text" placeholder="비밀번호 확인">
+                <input type="text" id="name" class="sign-up-box input-text" name="name" placeholder="이름 (닉네임)">
+                <input type="text" id="email" class="sign-up-box input-text" name="email" placeholder="E-mail">
+                <input type="text" id="certNumber" class="sign-up-box input-text" name="certNumber" placeholder="인증번호">
+                <button type="submit" id="submitBtn" class="sign-up-box submit-btn">가입하기</button>
+            </form>
         </div>
     </section>
 </body>
