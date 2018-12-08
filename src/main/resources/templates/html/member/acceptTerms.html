@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>oh29oh29 - 기술블로그</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/member/acceptTerms.css}" rel="stylesheet">
+</head>
+<body>
+    <th:block th:include="html/header"></th:block>
+    <section>
+        <div class="accept-terms-wrap">
+            <input type="checkbox" id="accept" class="">
+            <button type="submit" id="submitBtn" class="submit-btn">동의하기</button>
+        </div>
+    </section>
+</body>
+</html>

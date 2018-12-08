@@ -10,6 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 public class MemberController {
 
+    @GetMapping("/accept-terms")
+    public String acceptTermsView() {
+        return "html/member/acceptTerms";
+    }
+
+    @PostMapping("/accept-terms")
+    public String acceptTerms() {
+        return "redirect:/sign-up";
+    }
+
     @GetMapping("/sign-up")
     public String signUpView() {
         return "html/member/signUp";
