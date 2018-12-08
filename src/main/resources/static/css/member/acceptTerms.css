@@ -1,0 +1,35 @@
+.accept-terms-wrap {
+    width: 800px;
+    margin: 50px auto;
+}
+.terms-title {
+
+}
+.terms-contents {
+    max-height: 250px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    padding: 15px;
+}
+.accept-checkbox-wrap {
+    text-align: center;
+    margin: 20px 0;
+}
+.accept-text {
+    line-height: 20px;
+}
+.accept-checkbox {
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+}
+.accept-btn-wrap {
+    text-align: center;
+    margin: 50px 0;
+}
+.accept-btn {
+    width: 200px;
+    font-size: 20px;
+    line-height: 40px;
+}
