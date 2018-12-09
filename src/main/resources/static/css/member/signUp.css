@@ -3,20 +3,49 @@
     margin: 0 auto;
 }
 .sign-up-form {
-
+    font-size: 0;
+}
+.sign-up-row {
+    margin: 25px 0;
+}
+.label-for-input {
+    font-size: 16px;
+    display: block;
+    font-weight: bold;
 }
 .sign-up-box {
     line-height: 40px;
+    font-size: 16px;
 }
 .input-text {
-    width: 466px;
-    font-size: 16px;
+    width: 468px;
     padding: 0 15px;
+    border: 1px solid #000;
+}
+.input-short-text {
+    width: 389px;
+    vertical-align: middle;
+    border: 0;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}
+.input-cert {
+    border: 0;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}
+.sub-btn {
+    width: 80px;
+    line-height: 40px;
+    vertical-align: middle;
+    background: none;
+    border: 1px solid #000;
 }
 .submit-btn {
     width: 500px;
     margin: 20px 0;
-    font-size: 16px;
     font-weight: bold;
     background-color: green;
 }
