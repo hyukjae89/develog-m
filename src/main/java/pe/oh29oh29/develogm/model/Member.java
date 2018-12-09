@@ -16,6 +16,9 @@ public class Member implements Serializable {
     private String id;
 
     @Column
+    private String passwd;
+
+    @Column
     private String name;
 
     @Column
@@ -25,10 +28,10 @@ public class Member implements Serializable {
     private boolean isAdmin;
 
     @Column
-    private String provider;
+    private String signUpDate;
 
     @Column
-    private String regDate;
+    private String signInDate;
 
     @Column
     private boolean isExit;

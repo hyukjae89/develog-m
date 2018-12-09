@@ -31,7 +31,7 @@ public class MemberRepositoryTest {
             mockMember.setId("testId" + i);
             mockMember.setEmail("testEmail" + i);
             mockMember.setName("testName" + i);
-            mockMember.setRegDate("20181201000000");
+            mockMember.setSignUpDate("20181201000000");
             mockMemberList.add(mockMember);
         }
     }
@@ -49,7 +49,7 @@ public class MemberRepositoryTest {
         assertEquals(mockMember.getId(), savedMember.getId());
         assertEquals(mockMember.getEmail(), savedMember.getEmail());
         assertEquals(mockMember.getName(), savedMember.getName());
-        assertEquals(mockMember.getRegDate(), savedMember.getRegDate());
+        assertEquals(mockMember.getSignUpDate(), savedMember.getSignUpDate());
     }
 
     @Test
@@ -79,13 +79,13 @@ public class MemberRepositoryTest {
         mockMember2.setId(mockMember.getId());
         mockMember2.setEmail(mockMember.getEmail());
         mockMember2.setName("updateName");
-        mockMember2.setRegDate(mockMember.getRegDate());
+        mockMember2.setSignUpDate(mockMember.getSignUpDate());
         Member updatedMember = repository.save(mockMember2);
 
         assertEquals(mockMember.getId(), updatedMember.getId());
         assertEquals(mockMember.getEmail(), updatedMember.getEmail());
         assertEquals(mockMember2.getName(), updatedMember.getName());
-        assertEquals(mockMember.getRegDate(), updatedMember.getRegDate());
+        assertEquals(mockMember.getSignUpDate(), updatedMember.getSignUpDate());
     }
 
     @Test
