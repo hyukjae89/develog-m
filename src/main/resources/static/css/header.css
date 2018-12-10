@@ -6,7 +6,7 @@ header {
 }
 .logo-wrap {
     display: inline-block;
-    line-height: 60px;
+    line-height: 57px;
     margin: 0 0 0 20px;
 }
 .logo-link {
@@ -18,4 +18,15 @@ header {
 .logo-text:last-child {
     vertical-align: bottom;
     margin: 0 0 0 5px;
+}
+.member-wrap {
+    display: inline-block;
+    float: right;
+    line-height: 60px;
+    margin: 0 20px 0 0;
+}
+.sign-in-btn {
+    width: 70px;
+    line-height: 23px;
+    font-size: 12px;
 }

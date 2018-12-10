@@ -10,8 +10,24 @@
 <body>
     <th:block th:include="html/header"></th:block>
     <section>
-
-
+        <div class="sign-in-wrap">
+            <div class="sign-in-form">
+                <div>
+                    <input type="text" id="id" class="sign-in-box input-text input-id" name="id" placeholder="아이디">
+                </div>
+                <div>
+                    <input type="password" id="password" class="sign-in-box input-text" name="password" placeholder="비밀번호">
+                </div>
+                <div class="sign-in-ok-row">
+                    <button id="submitBtn" class="sign-in-box submit-btn">로그인</button>
+                </div>
+                <div class="sign-in-option-row">
+                    <a href="/member/search/id" id="idSearchLink" class="option-link id-search-link">아이디 찾기</a>
+                    <a href="/member/search/passwd" id="passwdSearchLink" class="option-link passwd-search-link">비밀번호 찾기</a>
+                    <a href="/member/accept-terms" id="signUpLink" class="option-link sign-up-link">회원가입</a>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 </html>
