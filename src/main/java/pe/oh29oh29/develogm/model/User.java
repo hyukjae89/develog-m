@@ -1,16 +1,15 @@
 package pe.oh29oh29.develogm.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "members")
-@Getter
-@Setter
-public class Member implements Serializable {
+@Table(name = "users")
+@Data
+public class User implements Serializable {
 
     @Id
     private String id;

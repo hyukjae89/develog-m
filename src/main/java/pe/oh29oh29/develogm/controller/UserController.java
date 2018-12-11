@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/member")
-public class MemberController {
+@RequestMapping("/user")
+public class UserController {
 
     @GetMapping("/accept-terms")
     public String acceptTermsView() {
-        return "html/member/acceptTerms";
+        return "html/user/acceptTerms";
     }
 
     @PostMapping("/accept-terms")
@@ -22,7 +22,7 @@ public class MemberController {
 
     @GetMapping("/sign-up")
     public String signUpView() {
-        return "html/member/signUp";
+        return "html/user/signUp";
     }
 
     @PostMapping("/sign-up")
@@ -32,7 +32,7 @@ public class MemberController {
 
     @GetMapping("/sign-in")
     public String signInView() {
-        return "html/member/signIn";
+        return "html/user/signIn";
     }
 
     @PostMapping("/sign-in")
@@ -42,16 +42,16 @@ public class MemberController {
 
     @GetMapping("/my-info")
     public String myInfoView() {
-        return "html/member/myInfo";
+        return "html/user/myInfo";
     }
 
     @PatchMapping("/my-info")
     public String updateMyInfo() {
-        return "html/member/myInfo";
+        return "html/user/myInfo";
     }
 
-    @GetMapping("/checkDuplicatedId")
-    public String checkDuplicatedId() {
+    @GetMapping("/check-id")
+    public String checkId() {
         return null;
     }
 
