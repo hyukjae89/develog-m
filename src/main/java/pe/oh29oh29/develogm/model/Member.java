@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "users")
+@Table(name = "members")
 @Data
-public class User implements Serializable {
+public class Member implements Serializable {
 
     @Id
     private String id;
