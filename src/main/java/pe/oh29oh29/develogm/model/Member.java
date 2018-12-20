@@ -24,7 +24,7 @@ public class Member implements Serializable {
     private String email;
 
     @Column
-    private boolean isAdmin;
+    private String role;
 
     @Column
     private String signUpDate;
