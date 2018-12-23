@@ -10,7 +10,7 @@
 
         if (isAccept) {
             console.log("동의");
-            location.href = "/user/sign-up";
+            location.href = "/member/sign-up";
         } else {
             console.log("미동의");
         }

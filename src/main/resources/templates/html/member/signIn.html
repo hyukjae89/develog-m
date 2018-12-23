@@ -11,9 +11,10 @@
     <th:block th:include="html/header"></th:block>
     <section>
         <div class="sign-in-wrap">
-            <div class="sign-in-form">
+            <form class="sign-in-form" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <div>
-                    <input type="text" id="id" class="sign-in-box input-text input-id" name="id" placeholder="아이디">
+                    <input type="text" id="id" class="sign-in-box input-text input-id" name="username" placeholder="아이디">
                 </div>
                 <div>
                     <input type="password" id="password" class="sign-in-box input-text" name="password" placeholder="비밀번호">
@@ -22,11 +23,11 @@
                     <button id="submitBtn" class="sign-in-box submit-btn">로그인</button>
                 </div>
                 <div class="sign-in-option-row">
-                    <a href="/user/search/id" id="idSearchLink" class="option-link id-search-link">아이디 찾기</a>
-                    <a href="/user/search/passwd" id="passwdSearchLink" class="option-link passwd-search-link">비밀번호 찾기</a>
-                    <a href="/user/accept-terms" id="signUpLink" class="option-link sign-up-link">회원가입</a>
+                    <a href="/member/search/id" id="idSearchLink" class="option-link id-search-link">아이디 찾기</a>
+                    <a href="/member/search/passwd" id="passwdSearchLink" class="option-link passwd-search-link">비밀번호 찾기</a>
+                    <a href="/member/accept-terms" id="signUpLink" class="option-link sign-up-link">회원가입</a>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 </body>

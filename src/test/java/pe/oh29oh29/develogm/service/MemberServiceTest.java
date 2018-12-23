@@ -31,7 +31,7 @@ public class MemberServiceTest extends MemberTest {
         boolean result = repository.count(Example.of(existMember)) > 0 ? true : false;
 
         Member notExistMember = new Member();
-        notExistMember.setId("notExistUserId");
+        notExistMember.setId("notExistMemberId");
         boolean result2 = repository.count(Example.of(notExistMember)) > 0 ? true : false;
 
         assertTrue(result);
