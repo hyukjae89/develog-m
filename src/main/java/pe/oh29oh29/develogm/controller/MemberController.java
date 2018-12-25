@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.oh29oh29.develogm.model.Member;
+import pe.oh29oh29.develogm.model.MemberOptions;
 import pe.oh29oh29.develogm.service.MemberService;
 
 @Controller
@@ -32,8 +33,8 @@ public class MemberController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp(Member member) {
-        memberService.signUp(member);
+    public String signUp(Member member, MemberOptions memberOptions) {
+        memberService.signUp(member, memberOptions);
         return "redirect:/";
     }
 

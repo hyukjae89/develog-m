@@ -26,7 +26,6 @@ public class MemberRepositoryTest extends MemberTest {
         Member savedMember = repository.save(mockMember);
 
         assertEquals(mockMember.getId(), savedMember.getId());
-        assertEquals(mockMember.getEmail(), savedMember.getEmail());
         assertEquals(mockMember.getName(), savedMember.getName());
         assertEquals(mockMember.getSignUpDate(), savedMember.getSignUpDate());
     }
@@ -56,13 +55,11 @@ public class MemberRepositoryTest extends MemberTest {
 
         Member mockMember2 = new Member();
         mockMember2.setId(mockMember.getId());
-        mockMember2.setEmail(mockMember.getEmail());
         mockMember2.setName("updateName");
         mockMember2.setSignUpDate(mockMember.getSignUpDate());
         Member updatedMember = repository.save(mockMember2);
 
         assertEquals(mockMember.getId(), updatedMember.getId());
-        assertEquals(mockMember.getEmail(), updatedMember.getEmail());
         assertEquals(mockMember2.getName(), updatedMember.getName());
         assertEquals(mockMember.getSignUpDate(), updatedMember.getSignUpDate());
     }

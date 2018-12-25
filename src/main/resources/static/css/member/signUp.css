@@ -5,6 +5,15 @@
 .sign-up-form {
     font-size: 0;
 }
+.sign-up-fieldset {
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 0 0 50px 0;
+}
+.sign-up-fieldset legend{
+    font-size: 14px;
+    padding: 0 10px 0 0;
+}
 .sign-up-row {
     margin: 25px 0;
 }

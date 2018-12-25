@@ -21,9 +21,6 @@ public class Member implements Serializable {
     private String name;
 
     @Column
-    private String email;
-
-    @Column
     private String role;
 
     @Column
