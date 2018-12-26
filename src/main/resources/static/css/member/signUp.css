@@ -7,11 +7,11 @@
 }
 .sign-up-fieldset {
     border: 0;
-    border-top: 1px solid #000;
     margin: 0 0 50px 0;
 }
 .sign-up-fieldset legend{
     font-size: 14px;
+    font-weight: bold;
     padding: 0 10px 0 0;
 }
 .sign-up-row {
@@ -20,7 +20,6 @@
 .label-for-input {
     font-size: 16px;
     display: block;
-    font-weight: bold;
 }
 .sign-up-box {
     line-height: 40px;
@@ -39,11 +38,11 @@
     border-bottom: 1px solid #000;
     border-left: 1px solid #000;
 }
-.input-cert {
-    border: 0;
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
+.validation-msg {
+    display: none;
+    font-size: 13px;
+    padding: 5px 0 0 0;
+    color: #ff0000;
 }
 .sub-btn {
     width: 80px;
