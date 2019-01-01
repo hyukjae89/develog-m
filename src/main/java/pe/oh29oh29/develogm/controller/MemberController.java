@@ -1,13 +1,13 @@
 package pe.oh29oh29.develogm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pe.oh29oh29.develogm.model.Member;
 import pe.oh29oh29.develogm.model.MemberOptions;
+import pe.oh29oh29.develogm.model.response.MemberResponseCode;
+import pe.oh29oh29.develogm.model.response.Response;
 import pe.oh29oh29.develogm.service.MemberService;
 
 @Controller
@@ -60,8 +60,16 @@ public class MemberController {
     }
 
     @GetMapping("/check-id")
-    public String checkId() {
-        return null;
+    @ResponseBody
+    public ResponseEntity<Response> checkId(@RequestParam String id) {
+        int code;
+        if (memberService.existId(id)) {
+            code = MemberResponseCode.EXIST_ID;
+        } else {
+            code = MemberResponseCode.NOT_EXIST_ID;
+        }
+
+        return ResponseEntity.ok(new Response(code));
     }
 
 }

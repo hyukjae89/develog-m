@@ -53,7 +53,25 @@
             return;
         }
 
-        $this.next().text("이미 존재하는 아이디 입니다.").show();
+        $.ajax({
+            url : "/member/check-id",
+            type : "GET",
+            data : 'id=' + $('#id').val()
+        }).done(function(response) {
+            console.log(response);
+            if (response.code === responseCode.EXIST_ID) {
+                $this.next().text("이미 존재하는 아이디 입니다.").show();
+                $this.addClass('failure-sub-btn').removeClass('ready-sub-btn success-sub-btn');
+            } else if (response.code === responseCode.NOT_EXIST_ID) {
+                $this.next().empty().hide();
+                $this.addClass('success-sub-btn').removeClass('ready-sub-btn failure-sub-btn');
+            }
+        }).fail(function(request, status, error) {
+            console.log(request);
+            console.log(status);
+            console.log(error);
+        });
+
 
     });
 
