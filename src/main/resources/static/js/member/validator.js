@@ -15,48 +15,33 @@ var validator = (function() {
             $dom.val(value);
         }
 
-        // 입력란 길이 검사
-        if (value.length === 0) {
-            return false;
-        }
-
-        return true;
+        return value.length > 0;
     };
 
     /*
-    * TODO: 영문 확인
+    * TODO: 오직 영문자와 숫자 입력 여부 확인
     */
-    var _checkOnlyEnglishValue = function($dom) {
-
+    var _checkOnlyAlphabatAndNumberValue = function($dom) {
+        return new RegExp(/^[a-z0-9+]*$/).test($dom.val());
     };
 
     /*
     * TODO: 최소 입력 제한 확인
     */
     var _checkMinimumInputValue = function($dom, min) {
-
-        if ($dom.val().length < min) {
-            return false;
-        }
-
-        return true;
+        return $dom.val().length >= min;
     };
 
     /*
     * TODO: 두 입력값 일치 여부 확인
     */
     var _checkSameValue = function($dom1, $dom2) {
-
-        if ($dom1.val() !== $dom2.val()) {
-            return false;
-        }
-
-        return true;
+        return $dom1.val() === $dom2.val();
     };
 
     return {
         checkRequiredValue : _checkRequiredValue,
-        checkOnlyEnglishValue : _checkOnlyEnglishValue,
+        checkOnlyAlphabatAndNumberValue : _checkOnlyAlphabatAndNumberValue,
         checkMinimumInputValue : _checkMinimumInputValue,
         checkSameValue : _checkSameValue
     }
