@@ -11,7 +11,7 @@
     <th:block th:include="html/header"></th:block>
     <section>
         <div class="sign-up-wrap">
-            <form class="sign-up-form" action="/member/sign-up" method="post">
+            <form id="signUpForm" class="sign-up-form" action="/member/sign-up" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <fieldset class="sign-up-fieldset">
                     <legend>기본 정보</legend>
@@ -32,8 +32,13 @@
                         <p class="validation-msg"></p>
                     </div>
                     <div class="sign-up-row">
-                        <label for="name"l class="label-for-input">이름</label>
+                        <label for="name" class="label-for-input">이름</label>
                         <input type="text" id="name" class="sign-up-box input-text" name="name">
+                        <p class="validation-msg"></p>
+                    </div>
+                    <div class="sign-up-row">
+                        <label for="email" class="label-for-input">이메일</label>
+                        <input type="text" id="email" class="sign-up-box input-text" name="email">
                         <p class="validation-msg"></p>
                     </div>
                 </fieldset>

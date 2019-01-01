@@ -39,10 +39,19 @@ var validator = (function() {
         return $dom1.val() === $dom2.val();
     };
 
+    /*
+    * TODO: 이메일 형식 확인
+    */
+    var _checkEmailValue = function($dom) {
+        return new RegExp(/^([\.0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[a-zA-Z_-]+){1,2}$/).test($dom.val());
+
+    };
+
     return {
         checkRequiredValue : _checkRequiredValue,
         checkOnlyAlphabatAndNumberValue : _checkOnlyAlphabatAndNumberValue,
         checkMinimumInputValue : _checkMinimumInputValue,
-        checkSameValue : _checkSameValue
+        checkSameValue : _checkSameValue,
+        checkEmailValue : _checkEmailValue
     }
 })();

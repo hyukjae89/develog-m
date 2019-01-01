@@ -3,17 +3,21 @@
 
     var validationFlag = {
         'id' : {
+            'isNotEmpty' : false,
             'doesNotExist' : false,
-            'isOnlyAlphabatAndNumber' : false,
-            'isNotEmpty' : false
+            'isOnlyAlphabatAndNumber' : false
         },
         'password' : {
+            'isNotEmpty' : false,
             'isMatch' : false,
-            'isMoreThan8' : false,
-            'isNotEmpty' : false
+            'isMoreThan8' : false
         },
         'name' : {
             'isNotEmpty' : false
+        },
+        'email' : {
+            'isNotEmpty' : false,
+            'isEmailFormat' : false
         },
         'passwordQuestion' : {
             'isNotEmpty' : false
@@ -22,6 +26,8 @@
             'isNotEmpty' : false
         }
     };
+
+    var idValue;
 
     $('#id').on('blur', function() {
         var $this = $(this);
@@ -36,12 +42,11 @@
             return;
         }
 
-        if (!validationFlag.id.doesNotExist) {
-            $this.siblings('.validation-msg').text("중복 확인이 필요합니다.").show();
-            return;
+        if (idValue !== $this.val()) {
+            validationFlag.id.doesNotExist = false;
+            idValue = $this.val();
+            $('#idCheckBtn').addClass('ready-sub-btn').removeClass('failure-sub-btn success-sub-btn');
         }
-
-        // 입력한 값의 변화가 생기면 중복 재확인 필요
 
         $this.siblings('.validation-msg').empty().hide();
     });
@@ -58,18 +63,19 @@
             type : "GET",
             data : 'id=' + $('#id').val()
         }).done(function(response) {
-            console.log(response);
+
             if (response.code === responseCode.EXIST_ID) {
                 $this.next().text("이미 존재하는 아이디 입니다.").show();
                 $this.addClass('failure-sub-btn').removeClass('ready-sub-btn success-sub-btn');
+                validationFlag.id.doesNotExist = false;
             } else if (response.code === responseCode.NOT_EXIST_ID) {
                 $this.next().empty().hide();
                 $this.addClass('success-sub-btn').removeClass('ready-sub-btn failure-sub-btn');
+                validationFlag.id.doesNotExist = true;
             }
+
         }).fail(function(request, status, error) {
-            console.log(request);
-            console.log(status);
-            console.log(error);
+            validationFlag.id.doesNotExist = false;
         });
 
 
@@ -113,6 +119,22 @@
         $this.next().empty().hide();
     });
 
+    $('#email').on('blur', function() {
+        var $this = $(this);
+
+        if (!(validationFlag.email.isNotEmpty = validator.checkRequiredValue($this))) {
+            $this.next().text("필수값 입니다.").show();
+            return;
+        }
+
+        if (!(validationFlag.email.isEmailFormat = validator.checkEmailValue($this))) {
+            $this.next().text("이메일 형식이 아닙니다.").show();
+            return;
+        }
+
+        $this.next().empty().hide();
+    });
+
     $('#passwordQuestion').on('blur', function() {
         var $this = $(this);
 
@@ -133,6 +155,13 @@
         }
 
         $this.next().empty().hide();
+    });
+
+    $('#signUpForm').on('submit', function() {
+        if (!validationFlag.id.doesNotExist) {
+            $('#id').siblings('.validation-msg').text("중복 확인이 필요합니다.").show();
+            return false;
+        }
     });
 
 })();

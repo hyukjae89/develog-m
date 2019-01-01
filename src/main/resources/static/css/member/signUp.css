@@ -52,13 +52,13 @@
     border: 1px solid #000;
 }
 .ready-sub-btn {
-    color: #FAED7D;
+    background-color: #FAED7D;
 }
 .failure-sub-btn {
-    color: #F15F5F;
+    background-color: #F15F5F;
 }
 .success-sub-btn {
-    color: #86E57F;
+    background-color: #86E57F;
 }
 .submit-btn {
     width: 500px;
