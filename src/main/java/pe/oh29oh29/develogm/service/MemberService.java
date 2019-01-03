@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pe.oh29oh29.develogm.model.Member;
 import pe.oh29oh29.develogm.model.MemberOptions;
-import pe.oh29oh29.develogm.model.SecurityMember;
+import pe.oh29oh29.develogm.model.MemberForSecurity;
 import pe.oh29oh29.develogm.repository.MemberOptionsRepository;
 import pe.oh29oh29.develogm.repository.MemberRepository;
 
@@ -43,6 +43,6 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        return Optional.ofNullable(memberRepository.findById(id)).filter(member -> member != null).map(member -> new SecurityMember(member.get())).get();
+        return Optional.ofNullable(memberRepository.findById(id)).filter(member -> member != null).map(member -> new MemberForSecurity(member.get())).get();
     }
 }

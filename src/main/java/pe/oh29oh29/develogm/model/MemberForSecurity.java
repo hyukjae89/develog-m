@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecurityMember extends User {
+public class MemberForSecurity extends User {
 
     private static final String ROLE_PREFIX = "ROLE_";
 
-    public SecurityMember(Member member) {
+    public MemberForSecurity(Member member) {
         super(member.getId(), member.getPasswd(), makeGrantedAuthority(member.getRole()));
     }
 
