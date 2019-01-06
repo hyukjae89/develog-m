@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.oh29oh29.develogm.model.Member;
 import pe.oh29oh29.develogm.model.MemberOptions;
 import pe.oh29oh29.develogm.model.MemberForSecurity;
@@ -30,10 +31,11 @@ public class MemberService implements UserDetailsService {
         return memberRepository.count(Example.of(newMember)) > 0 ? true : false;
     }
 
+    @Transactional
     public void signUp(Member member, MemberOptions memberOptions) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         member.setPasswd(passwordEncoder.encode(member.getPasswd()));
-        member.setRole("BASIC");
+        member.setRole("USER");
         member.setSignUpDate("20181231000000");
         memberOptions.setMemberId(member.getId());
 
@@ -44,5 +46,9 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         return Optional.ofNullable(memberRepository.findById(id)).filter(member -> member != null).map(member -> new MemberForSecurity(member.get())).get();
+    }
+
+    public Member getMember(String id) {
+        return memberRepository.getOne(id);
     }
 }

@@ -7,5 +7,6 @@
     </div>
     <div class="member-wrap">
        <button id="signInBtn" class="sign-in-btn" onclick="location.href='/member/sign-in'">로그인</button>
+        <p th:text="${session.user}" th:unless="${session == null}">test</p>
     </div>
 </header>

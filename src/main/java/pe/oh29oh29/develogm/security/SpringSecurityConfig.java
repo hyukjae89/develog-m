@@ -2,34 +2,28 @@ package pe.oh29oh29.develogm.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import pe.oh29oh29.develogm.model.MemberForSecurity;
 import pe.oh29oh29.develogm.service.MemberService;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    AuthProvider authProvider;
-
-    @Autowired
-    AuthFailureHandler authFailureHandler;
-
-    @Autowired
-    AuthSuccessHandler authSuccessHandler;
-
-    @Autowired
-    MemberService memberService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,8 +32,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationSuccessHandler successHandler() {
-        return new LoginSuccessHandler("/");//default로 이동할 url
+        return new LoginSuccessHandler("/");
     }
+
+    @Autowired
+    MemberService memberService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,50 +55,36 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
-                .and()
+            .and()
                 .formLogin()
                 .loginPage("/member/sign-in")
                 .loginProcessingUrl("/member/sign-in")
-                .defaultSuccessUrl("/")
                 .successHandler(successHandler())
                 .failureUrl("/member/sign-in")
-                .and()
-                .logout();
-
-//        // 로그인 설정
-//        http.authorizeRequests()
-//                // ROLE_USER, ROLE_ADMIN으로 권한 분리 유알엘 정의
-//                .antMatchers("/", "/user/login", "/error**").permitAll()
-//                .antMatchers("/**").access("ROLE_USER")
-//                .antMatchers("/**").access("ROLE_ADMIN")
-//                .antMatchers("/admin/**").access("ROLE_ADMIN")
-//                .antMatchers("/**").authenticated()
-//                .and()
-//                // 로그인 페이지 및 성공 url, handler 그리고 로그인 시 사용되는 id, password 파라미터 정의
-//                .formLogin()
-//                .loginPage("/user/login")
-//                .defaultSuccessUrl("/")
-//                .failureHandler(authFailureHandler)
-//                .successHandler(authSuccessHandler)
-//                .usernameParameter("id")
-//                .passwordParameter("password")
-//                .and()
-//                // 로그아웃 관련 설정
-//                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-//                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true)
-//                .and()
-//                // csrf 사용유무 설정
-//                // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
-//                .csrf()
-//                .and()
-//                // 로그인 프로세스가 진행될 provider
-//                .authenticationProvider(authProvider);
+                .usernameParameter("id")
+                .passwordParameter("passwd")
+            .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+            .and()
+                // csrf 사용유무 설정
+                // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
+                .csrf();
     }
 
     public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
         public LoginSuccessHandler(String defaultTargetUrl) {
             setDefaultTargetUrl(defaultTargetUrl);
         }
+
+        @Override
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+            HttpSession session = request.getSession();
+            MemberForSecurity member = (MemberForSecurity) authentication.getPrincipal();
+            session.setAttribute("user", member);
+            super.onAuthenticationSuccess(request, response, authentication);
+        }
     }
+
 }
