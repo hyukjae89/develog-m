@@ -82,7 +82,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
             HttpSession session = request.getSession();
             MemberForSecurity member = (MemberForSecurity) authentication.getPrincipal();
-            session.setAttribute("user", member);
+            session.setAttribute("user", member.getUsername());
             super.onAuthenticationSuccess(request, response, authentication);
         }
     }

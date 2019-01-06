@@ -6,7 +6,7 @@
         </a>
     </div>
     <div class="member-wrap">
-       <button id="signInBtn" class="sign-in-btn" onclick="location.href='/member/sign-in'">로그인</button>
-        <p th:text="${session.user}" th:unless="${session == null}">test</p>
+        <button th:if="${session.user == null}" id="signInBtn" class="sign-in-btn" onclick="location.href='/member/sign-in'">로그인</button>
+        <span th:if="${session.user != null}" th:text="${session.user} + ' 님 환영합니다'"></span>
     </div>
 </header>
