@@ -12,4 +12,9 @@ public class AdminController {
     public String homeView() {
         return "html/admin/home";
     }
+
+    @GetMapping("/categories")
+    public String categoryManagementView() {
+        return "html/admin/menu/categories";
+    }
 }

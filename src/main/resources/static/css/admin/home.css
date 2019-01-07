@@ -1,0 +1,9 @@
+body {
+    font-size: 0;
+}
+#contentsWrap {
+    width: calc(100% - 200px);
+    height: 100%;
+    margin: 0 0 0 200px;
+    font-size: 16px;
+}
