@@ -28,7 +28,7 @@ public class MemberService implements UserDetailsService {
     public boolean existId(String id) {
         Member newMember = new Member();
         newMember.setId(id);
-        return memberRepository.count(Example.of(newMember)) > 0 ? true : false;
+        return memberRepository.count(Example.of(newMember)) > 0;
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        return Optional.ofNullable(memberRepository.findById(id)).filter(member -> member != null).map(member -> new MemberForSecurity(member.get())).get();
+        return Optional.ofNullable(memberRepository.findById(id)).map(member -> new MemberForSecurity(member.get())).get();
     }
 
     public Member getMember(String id) {
