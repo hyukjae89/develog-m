@@ -1,10 +1,13 @@
 package pe.oh29oh29.develogm.common;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pe.oh29oh29.develogm.model.Category;
+import pe.oh29oh29.develogm.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,17 @@ public class CategoryTest {
             mockCategory.setVisible(true);
             mockCategoryList.add(mockCategory);
         }
+    }
+
+    @Autowired
+    protected CategoryRepository categoryRepository;
+
+    protected Category mockCategory;
+
+    @Before
+    public void setUp() {
+        categoryRepository.deleteAll();
+        mockCategory = mockCategoryList.get(0);
     }
 
 }

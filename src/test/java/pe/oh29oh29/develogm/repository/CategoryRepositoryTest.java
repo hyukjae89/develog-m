@@ -1,69 +1,67 @@
 package pe.oh29oh29.develogm.repository;
 
-import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runners.MethodSorters;
 import pe.oh29oh29.develogm.common.CategoryTest;
 import pe.oh29oh29.develogm.model.Category;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategoryRepositoryTest extends CategoryTest {
 
-    @Autowired
-    CategoryRepository repository;
+    @Test
+    public void t1_insert() {
+        Category insertedCategory = categoryRepository.save(mockCategory);
 
-    @Before
-    public void before() {
-        repository.deleteAll();
+        // verification
+        assertEquals(mockCategory.getName(), insertedCategory.getName());
+        assertEquals(mockCategory.getDepth(), insertedCategory.getDepth());
+        assertEquals(mockCategory.getOrdering(), insertedCategory.getOrdering());
+        assertEquals(mockCategory.isVisible(), insertedCategory.isVisible());
+        mockCategory = insertedCategory;
     }
 
     @Test
-    public void insert() {
-        Category mockCategory = mockCategoryList.get(0);
-        Category savedCategory = repository.save(mockCategory);
+    public void t2_findAll() {
+        t1_insert();
 
-        assertEquals(mockCategory.getName(), savedCategory.getName());
-        assertEquals(mockCategory.getOrdering(), savedCategory.getOrdering());
+        List<Category> categoryList = categoryRepository.findAll();
+
+        // verification
+        assertEquals(1, categoryList.size());
     }
 
     @Test
-    public void findAll() {
-        Category mockCategory = mockCategoryList.get(0);
-        repository.save(mockCategory);
-
-        List<Category> category = repository.findAll();
-        assertEquals(1, category.size());
-    }
-
-    @Test
-    public void update() {
-        Category mockCategory = mockCategoryList.get(0);
-        Category insertedCategory = repository.save(mockCategory);
-
+    public void t3_update() {
+        t1_insert();
         Category mockCategory2 = new Category();
-        mockCategory2.setId(insertedCategory.getId());
-        mockCategory2.setName("updateName");
-        mockCategory2.setOrdering(insertedCategory.getOrdering());
-        Category updatedCategory = repository.save(mockCategory2);
+        mockCategory2.setId(mockCategory.getId());
+        mockCategory2.setName("UPDATE_NAME");
+        mockCategory2.setDepth(100);
+        mockCategory2.setOrdering(100);
+        mockCategory2.setVisible(false);
 
+        Category updatedCategory = categoryRepository.save(mockCategory2);
+
+        // verification
         assertEquals(mockCategory2.getName(), updatedCategory.getName());
-        assertEquals(mockCategory.getOrdering(), updatedCategory.getOrdering());
+        assertEquals(mockCategory2.getDepth(), updatedCategory.getDepth());
+        assertEquals(mockCategory2.getOrdering(), updatedCategory.getOrdering());
+        assertEquals(mockCategory2.isVisible(), updatedCategory.isVisible());
     }
 
     @Test
-    public void delete() {
-        Category mockCategory = mockCategoryList.get(0);
-        Category insertedCategory = repository.save(mockCategory);
+    public void t4_delete() {
+        t1_insert();
+        String id = mockCategory.getId();
 
-        Category category = repository.findById(insertedCategory.getId()).orElse(null);
-        assertEquals(insertedCategory.getId(), category.getId());
+        categoryRepository.deleteById(id);
 
-        repository.deleteById(category.getId());
-        Category deletedCategory = repository.findById(category.getId()).orElse(null);
-        assertNull(deletedCategory);
+        // verification
+        assertEquals(0, categoryRepository.count());
     }
 }
