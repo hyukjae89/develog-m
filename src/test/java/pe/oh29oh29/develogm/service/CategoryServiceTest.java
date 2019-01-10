@@ -15,7 +15,7 @@ public class CategoryServiceTest extends CategoryTest {
 
     @Test
     public void t1_addCategory() {
-        // CODE
+        // test code
         Category insertedCategory = categoryRepository.save(mockCategory);
 
         // verification
@@ -31,7 +31,7 @@ public class CategoryServiceTest extends CategoryTest {
         // init
         t1_addCategory();
 
-        // CODE
+        // test code
         List<Category> categoryList = categoryRepository.findAll();
 
         // verification
@@ -50,7 +50,7 @@ public class CategoryServiceTest extends CategoryTest {
         categoryForUpdate.setOrdering(100);
         categoryForUpdate.setVisible(false);
 
-        // CODE
+        // test code
         Category updatedCategory = categoryRepository.save(categoryForUpdate);
 
         // verification
@@ -66,7 +66,7 @@ public class CategoryServiceTest extends CategoryTest {
         t1_addCategory();
         String id = mockCategory.getId();
 
-        // CODE
+        // test code
         categoryRepository.deleteById(id);
 
         // verification

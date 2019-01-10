@@ -25,7 +25,7 @@ public class MemberServiceTest extends MemberTest {
     MemberOptionsRepository memberOptionsRepository;
 
     @Before
-    public void before() {
+    public void setUp() {
         memberOptionsRepository.deleteAll();
         memberRepository.deleteAll();
     }
@@ -37,7 +37,7 @@ public class MemberServiceTest extends MemberTest {
         mockMember.setRole("USER");
         Member savedMember = memberRepository.save(mockMember);
 
-        // CODE
+        // test code
         Member existMember = new Member();
         existMember.setId(savedMember.getId());
         boolean result = memberRepository.count(Example.of(existMember)) > 0;
@@ -59,7 +59,7 @@ public class MemberServiceTest extends MemberTest {
         mockMemberOptions.setPasswdQuestion("password question");
         mockMemberOptions.setPasswdAnswer("password answer");
 
-        // CODE
+        // test code
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         mockMember.setPasswd(passwordEncoder.encode(mockMember.getPasswd()));
         mockMember.setRole("USER");

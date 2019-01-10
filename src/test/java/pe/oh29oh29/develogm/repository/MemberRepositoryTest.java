@@ -2,78 +2,87 @@ package pe.oh29oh29.develogm.repository;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runners.MethodSorters;
 import pe.oh29oh29.develogm.common.MemberTest;
 import pe.oh29oh29.develogm.model.Member;
 
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberRepositoryTest extends MemberTest {
 
-    @Autowired
-    MemberRepository repository;
+    @Test
+    public void t1_insert() {
+        // test code
+        Member insertedCategory = memberRepository.save(mockMember);
 
-    @Before
-    public void before() {
-        repository.deleteAll();
+        // verification
+        assertEquals(mockMember.getId(), insertedCategory.getId());
+        assertEquals(mockMember.getPasswd(), insertedCategory.getPasswd());
+        assertEquals(mockMember.getName(), insertedCategory.getName());
+        assertEquals(mockMember.getSignUpDate(), insertedCategory.getSignUpDate());
+        mockMember = insertedCategory;
     }
 
     @Test
-    public void signUp() {
-        Member mockMember = mockMemberList.get(0);
-        Member savedMember = repository.save(mockMember);
+    public void t2_findAll() {
+        // init
+        t1_insert();
 
-        assertEquals(mockMember.getId(), savedMember.getId());
-        assertEquals(mockMember.getName(), savedMember.getName());
-        assertEquals(mockMember.getSignUpDate(), savedMember.getSignUpDate());
+        // test code
+        List<Member> memberList = memberRepository.findAll();
+
+        // verification
+        assertEquals(1, memberList.size());
     }
 
     @Test
-    public void findAll() {
-        Member mockMember = mockMemberList.get(0);
-        repository.save(mockMember);
+    public void t3_findById() {
+        // init
+        t1_insert();
 
-        List<Member> members = repository.findAll();
-        assertEquals(1, members.size());
-    }
+        // test code
+        Member member = memberRepository.findById(mockMember.getId()).orElse(null);
 
-    @Test
-    public void findOne() {
-        Member mockMember = mockMemberList.get(0);
-        repository.save(mockMember);
-
-        Member member = repository.findById(mockMember.getId()).orElse(null);
+        // verification
+        assertNotNull(member);
         assertEquals(mockMember.getId(), member.getId());
     }
 
     @Test
-    public void update() {
-        Member mockMember = mockMemberList.get(0);
-        repository.save(mockMember);
-
+    public void t4_update() {
+        // init
+        t1_insert();
         Member mockMember2 = new Member();
         mockMember2.setId(mockMember.getId());
-        mockMember2.setName("updateName");
-        mockMember2.setSignUpDate(mockMember.getSignUpDate());
-        Member updatedMember = repository.save(mockMember2);
+        mockMember2.setPasswd("UPDATE_PASSWD");
+        mockMember2.setName("UPDATE_NAME");
+        mockMember2.setEmail("UPDATE_EMAIL");
+        mockMember2.setRole("UPD_ROLE");
+        mockMember2.setSignUpDate("1000");
 
-        assertEquals(mockMember.getId(), updatedMember.getId());
+        // test code
+        Member updatedMember = memberRepository.save(mockMember2);
+
+        // verification
+        assertEquals(mockMember2.getId(), updatedMember.getId());
+        assertEquals(mockMember2.getPasswd(), updatedMember.getPasswd());
         assertEquals(mockMember2.getName(), updatedMember.getName());
-        assertEquals(mockMember.getSignUpDate(), updatedMember.getSignUpDate());
+        assertEquals(mockMember2.getEmail(), updatedMember.getEmail());
     }
 
     @Test
-    public void delete() {
-        Member mockMember = mockMemberList.get(0);
-        repository.save(mockMember);
+    public void t5_delete() {
+        // init
+        t1_insert();
+        String id = mockMember.getId();
 
-        Member member = repository.findById(mockMember.getId()).orElse(null);
-        assertEquals(mockMember.getId(), member.getId());
+        // test code
+        memberRepository.deleteById(id);
 
-        repository.deleteById(member.getId());
-        Member deletedMember = repository.findById(member.getId()).orElse(null);
-        assertNull(deletedMember);
+        // verification
+        assertEquals(0, memberRepository.count());
     }
 }

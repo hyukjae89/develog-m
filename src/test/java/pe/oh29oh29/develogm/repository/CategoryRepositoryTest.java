@@ -15,6 +15,7 @@ public class CategoryRepositoryTest extends CategoryTest {
 
     @Test
     public void t1_insert() {
+        // test code
         Category insertedCategory = categoryRepository.save(mockCategory);
 
         // verification
@@ -27,8 +28,10 @@ public class CategoryRepositoryTest extends CategoryTest {
 
     @Test
     public void t2_findAll() {
+        // init
         t1_insert();
 
+        // test code
         List<Category> categoryList = categoryRepository.findAll();
 
         // verification
@@ -37,6 +40,7 @@ public class CategoryRepositoryTest extends CategoryTest {
 
     @Test
     public void t3_update() {
+        //init
         t1_insert();
         Category mockCategory2 = new Category();
         mockCategory2.setId(mockCategory.getId());
@@ -45,6 +49,7 @@ public class CategoryRepositoryTest extends CategoryTest {
         mockCategory2.setOrdering(100);
         mockCategory2.setVisible(false);
 
+        // test code
         Category updatedCategory = categoryRepository.save(mockCategory2);
 
         // verification
@@ -56,9 +61,11 @@ public class CategoryRepositoryTest extends CategoryTest {
 
     @Test
     public void t4_delete() {
+        // init
         t1_insert();
         String id = mockCategory.getId();
 
+        // test code
         categoryRepository.deleteById(id);
 
         // verification

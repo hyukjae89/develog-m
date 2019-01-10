@@ -16,7 +16,12 @@ import java.util.List;
 @SpringBootTest
 public class CategoryTest {
 
+    protected Category mockCategory;
+
     protected static List<Category> mockCategoryList;
+
+    @Autowired
+    protected CategoryRepository categoryRepository;
 
     @BeforeClass
     public static void beforeClass() {
@@ -30,11 +35,6 @@ public class CategoryTest {
             mockCategoryList.add(mockCategory);
         }
     }
-
-    @Autowired
-    protected CategoryRepository categoryRepository;
-
-    protected Category mockCategory;
 
     @Before
     public void setUp() {
