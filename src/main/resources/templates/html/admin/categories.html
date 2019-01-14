@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>oh29oh29 - 기술블로그</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <link th:href="@{/css/admin/home.css}" rel="stylesheet">
+    <link th:href="@{/css/admin/navigation.css}" rel="stylesheet">
+    <link th:href="@{/css/admin/categories.css}" rel="stylesheet">
+</head>
+<body>
+    <th:block th:include="html/admin/navigation"></th:block>
+    <section id="contentWrap" class="content-wrap">
+        <div>
+            <h1 class="content-title">카테고리 관리</h1>
+            <div class="category-mng-header">
+                <span class="category-item category-name">이름</span>
+                <span class="category-item category-ordering">순서</span>
+                <span class="category-item category-visible">비공개</span>
+            </div>
+            <div class="category-mng-body" th:each="category : ${categories}">
+                <input type="text" class="category-item category-name" name="categoryName" th:value="${category.name}"/>
+                <input type="text" class="category-item category-ordering" name="categoryOrdering" th:value="${category.ordering}"/>
+                <input type="checkbox" class="category-item category-visible" name="categoryVisible"/>
+                <button class="categoryDelBtn category-item category-del-btn">-</button>
+            </div>
+            <div>
+                <input type="text" class="category-item category-name" name="categoryName"/>
+                <input type="text" class="category-item category-ordering" name="categoryOrdering"/>
+                <input type="checkbox" class="category-item category-visible" name="categoryVisible"/>
+            </div>
+            <div class="category-btn-wrap">
+                <button id="saveBtn" class="save-btn">저장</button>
+            </div>
+        </div>
+    </section>
+    <script th:src="@{/import/jquery/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/admin/navigation.js}"></script>
+</body>
+</html>
