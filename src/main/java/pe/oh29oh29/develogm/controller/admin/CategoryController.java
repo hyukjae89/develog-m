@@ -17,7 +17,7 @@ public class CategoryController {
     @GetMapping("")
     public String categoryManagementView(Model model) {
         model.addAttribute("categories", categoryService.getCategories());
-        return "html/admin/menu/categories";
+        return "html/admin/categories";
     }
 
     @PostMapping("")
