@@ -10,7 +10,7 @@ public class AdminController {
 
     @GetMapping("")
     public String homeView() {
-        return "html/admin/home";
+        return "admin/home";
     }
 
 

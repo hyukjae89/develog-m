@@ -19,7 +19,7 @@ public class MemberController {
 
     @GetMapping("/accept-terms")
     public String acceptTermsView() {
-        return "html/member/acceptTerms";
+        return "member/acceptTerms";
     }
 
     @PostMapping("/accept-terms")
@@ -29,7 +29,7 @@ public class MemberController {
 
     @GetMapping("/sign-up")
     public String signUpView() {
-        return "html/member/signUp";
+        return "member/signUp";
     }
 
     @PostMapping("/sign-up")
@@ -40,7 +40,7 @@ public class MemberController {
 
     @GetMapping("/sign-in")
     public String signInView() {
-        return "html/member/signIn";
+        return "member/signIn";
     }
 
     @PostMapping("/sign-in")
@@ -51,12 +51,12 @@ public class MemberController {
 
     @GetMapping("/my-info")
     public String myInfoView() {
-        return "html/member/myInfo";
+        return "member/myInfo";
     }
 
     @PatchMapping("/my-info")
     public String updateMyInfo() {
-        return "html/member/myInfo";
+        return "member/myInfo";
     }
 
     @GetMapping("/check-id")
