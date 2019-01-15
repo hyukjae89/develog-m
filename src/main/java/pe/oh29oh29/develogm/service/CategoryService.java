@@ -1,4 +1,4 @@
-package pe.oh29oh29.develogm.service.admin;
+package pe.oh29oh29.develogm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public void addCategory(Category category) {
-        categoryRepository.save(category);
+    public void addCategory(List<Category> category) {
+        categoryRepository.saveAll(category);
     }
 
     public void deleteCategory(String id) {
