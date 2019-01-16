@@ -23,7 +23,7 @@
                     <input type="text" class="category-item category-name" th:name="'category[' + ${iter.index} + '].name'" th:value="${category.name}"/>
                     <input type="text" class="category-item category-ordering" th:name="'category[' + ${iter.index} + '].ordering'" th:value="${category.ordering}"/>
                     <input type="checkbox" class="category-item category-visible" th:name="'category[' + ${iter.index} + '].visible'"/>
-                    <button class="categoryDelBtn category-item category-del-btn">-</button>
+                    <button type="button" class="categoryDelBtn category-item category-del-btn" th:data-id="${category.id}">-</button>
                 </div>
                 <div class="category-mng-wrap">
                     <input type="text" class="category-item category-name" th:name="'category[' + ${#lists.size(categories)} + '].name'"/>
