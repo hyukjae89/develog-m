@@ -4,12 +4,11 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "comments")
 @Data
-public class Category implements Serializable {
+public class Comment {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -20,14 +19,17 @@ public class Category implements Serializable {
     private String id;
 
     @Column
-    private String name;
+    private String postId;
 
     @Column
-    private int depth;
+    private String memberId;
 
     @Column
-    private int ordering;
+    private String contents;
 
     @Column
-    private boolean isVisible;
+    private String regDate;
+
+    @Column
+    private String lastUpdateDate;
 }

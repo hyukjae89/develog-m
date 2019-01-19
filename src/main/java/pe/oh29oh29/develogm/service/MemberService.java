@@ -20,10 +20,10 @@ import java.util.Optional;
 public class MemberService implements UserDetailsService {
 
     @Autowired
-    MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
-    MemberOptionsRepository memberOptionsRepository;
+    private MemberOptionsRepository memberOptionsRepository;
 
     public boolean existId(String id) {
         Member newMember = new Member();
