@@ -24,5 +24,7 @@
     width: 40px;
 }
 .category-mng-header .category-visible {
+    width: 80px;
     margin: 0;
+    text-align: center;
 }
