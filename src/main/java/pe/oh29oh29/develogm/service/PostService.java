@@ -29,4 +29,8 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
+    public void deletePostsByCategory(String categoryId) {
+        postRepository.deletePostsByCategoryId(categoryId);
+    }
+
 }
