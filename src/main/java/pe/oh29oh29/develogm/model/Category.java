@@ -29,5 +29,5 @@ public class Category implements Serializable {
     private int ordering;
 
     @Column
-    private boolean isVisible;
+    private int isVisible;
 }

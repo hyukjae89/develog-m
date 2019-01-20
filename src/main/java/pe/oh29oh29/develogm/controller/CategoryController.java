@@ -1,13 +1,14 @@
 package pe.oh29oh29.develogm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.oh29oh29.develogm.model.Category;
+import pe.oh29oh29.develogm.model.response.CategoryResponseCode;
+import pe.oh29oh29.develogm.model.response.Response;
 import pe.oh29oh29.develogm.service.CategoryService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -23,20 +24,16 @@ public class CategoryController {
     }
 
     @PostMapping("")
-    public String addCategory(@RequestBody List<Category> category) {
+    @ResponseBody
+    public ResponseEntity<Response> addCategory(@RequestBody Category category) {
         categoryService.addCategory(category);
-        return "redirect:/admin/cateogires";
+        return ResponseEntity.ok(new Response(CategoryResponseCode.SUCCESS));
     }
 
     @DeleteMapping("")
-    public String deleteCategory(String id) {
+    @ResponseBody
+    public ResponseEntity<Response> deleteCategory(@RequestBody String id) {
         categoryService.deleteCategory(id);
-        return "redirect:/admin/cateogires";
-    }
-
-    @PatchMapping("")
-    public String updateCategory(Category category) {
-        categoryService.updateCategory(category);
-        return "redirect:/admin/cateogires";
+        return ResponseEntity.ok(new Response(CategoryResponseCode.SUCCESS));
     }
 }
