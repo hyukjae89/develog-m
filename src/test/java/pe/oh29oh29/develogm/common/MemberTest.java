@@ -32,11 +32,11 @@ public class MemberTest {
         mockMemberList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Member mockMember = new Member();
-            mockMember.setId("testId" + i);
-            mockMember.setPasswd("1234");
-            mockMember.setEmail("testEmail" + i);
-            mockMember.setName("testName" + i);
-            mockMember.setRole("TEST_ROLE");
+            mockMember.setId("TestId" + i);
+            mockMember.setPasswd("TestPassword" + i);
+            mockMember.setEmail("TestEmail" + i);
+            mockMember.setName("TestName" + i);
+            mockMember.setRole("TestRole" + i);
             mockMember.setSignUpDate("20181201000000");
             mockMemberList.add(mockMember);
         }

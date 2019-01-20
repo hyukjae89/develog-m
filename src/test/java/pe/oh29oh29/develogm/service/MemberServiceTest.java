@@ -11,7 +11,6 @@ import pe.oh29oh29.develogm.model.MemberOptions;
 import pe.oh29oh29.develogm.repository.MemberOptionsRepository;
 import pe.oh29oh29.develogm.repository.MemberRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
