@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.oh29oh29.develogm.model.Member;
-import pe.oh29oh29.develogm.model.MemberOptions;
 import pe.oh29oh29.develogm.model.response.MemberResponseCode;
 import pe.oh29oh29.develogm.model.response.Response;
 import pe.oh29oh29.develogm.service.MemberService;
@@ -33,8 +32,8 @@ public class MemberController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp(Member member, MemberOptions memberOptions) {
-        memberService.signUp(member, memberOptions);
+    public String signUp(Member member) {
+        memberService.signUp(member);
         return "redirect:/";
     }
 

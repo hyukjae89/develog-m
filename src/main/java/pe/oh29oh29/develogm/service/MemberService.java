@@ -9,9 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.oh29oh29.develogm.model.Member;
-import pe.oh29oh29.develogm.model.MemberOptions;
 import pe.oh29oh29.develogm.model.MemberForSecurity;
-import pe.oh29oh29.develogm.repository.MemberOptionsRepository;
 import pe.oh29oh29.develogm.repository.MemberRepository;
 
 import java.util.Optional;
@@ -22,9 +20,6 @@ public class MemberService implements UserDetailsService {
     @Autowired
     private MemberRepository memberRepository;
 
-    @Autowired
-    private MemberOptionsRepository memberOptionsRepository;
-
     public boolean existId(String id) {
         Member newMember = new Member();
         newMember.setId(id);
@@ -32,15 +27,13 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public void signUp(Member member, MemberOptions memberOptions) {
+    public void signUp(Member member) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         member.setPasswd(passwordEncoder.encode(member.getPasswd()));
         member.setRole("USER");
         member.setSignUpDate("20181231000000");
-        memberOptions.setMemberId(member.getId());
 
         memberRepository.save(member);
-        memberOptionsRepository.save(memberOptions);
     }
 
     @Override
