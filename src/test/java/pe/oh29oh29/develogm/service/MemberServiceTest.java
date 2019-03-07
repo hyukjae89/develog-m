@@ -7,8 +7,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pe.oh29oh29.develogm.common.MemberTest;
 import pe.oh29oh29.develogm.model.Member;
-import pe.oh29oh29.develogm.model.MemberOptions;
-import pe.oh29oh29.develogm.repository.MemberOptionsRepository;
 import pe.oh29oh29.develogm.repository.MemberRepository;
 
 import java.util.Optional;
@@ -20,12 +18,8 @@ public class MemberServiceTest extends MemberTest {
     @Autowired
     MemberRepository memberRepository;
 
-    @Autowired
-    MemberOptionsRepository memberOptionsRepository;
-
     @Before
     public void setUp() {
-        memberOptionsRepository.deleteAll();
         memberRepository.deleteAll();
     }
 
@@ -54,9 +48,6 @@ public class MemberServiceTest extends MemberTest {
     public void signUp() {
         // init
         Member mockMember = mockMemberList.get(0);
-        MemberOptions mockMemberOptions = new MemberOptions();
-        mockMemberOptions.setPasswdQuestion("password question");
-        mockMemberOptions.setPasswdAnswer("password answer");
 
         // test code
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -64,10 +55,7 @@ public class MemberServiceTest extends MemberTest {
         mockMember.setRole("USER");
         mockMember.setSignUpDate("20181231000000");
 
-        mockMemberOptions.setMemberId(mockMember.getId());
-
         memberRepository.save(mockMember);
-        memberOptionsRepository.save(mockMemberOptions);
 
         // verification
         Member savedMember = Optional.ofNullable(memberRepository.findAll().get(0)).orElse(null);

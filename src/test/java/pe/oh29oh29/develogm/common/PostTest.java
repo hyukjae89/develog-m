@@ -37,6 +37,7 @@ public class PostTest {
             mockPost.setDescription("TestDescription" + i);
             mockPost.setRegDate("1");
             mockPost.setLastUpdateDate("1");
+            mockPost.setUrlPathName("TestUrlPathName" + i);
             mockPostList.add(mockPost);
         }
     }

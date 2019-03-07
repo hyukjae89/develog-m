@@ -2,14 +2,13 @@ package pe.oh29oh29.develogm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.oh29oh29.develogm.model.Member;
 import pe.oh29oh29.develogm.model.response.MemberResponseCode;
 import pe.oh29oh29.develogm.model.response.Response;
 import pe.oh29oh29.develogm.service.MemberService;
 
-@Controller
+@RestController
 @RequestMapping("/member")
 public class MemberController {
 

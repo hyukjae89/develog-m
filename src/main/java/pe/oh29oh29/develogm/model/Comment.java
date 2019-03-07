@@ -25,6 +25,9 @@ public class Comment {
     private String memberId;
 
     @Column
+    private String parentCommentId;
+
+    @Column
     private String contents;
 
     @Column

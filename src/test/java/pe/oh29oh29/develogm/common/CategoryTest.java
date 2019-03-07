@@ -35,7 +35,7 @@ public class CategoryTest {
             mockCategory.setName("TestName" + i);
             mockCategory.setDepth(0);
             mockCategory.setOrdering(i);
-            mockCategory.setIsVisible(1);
+            mockCategory.setVisible(true);
             mockCategoryList.add(mockCategory);
         }
     }

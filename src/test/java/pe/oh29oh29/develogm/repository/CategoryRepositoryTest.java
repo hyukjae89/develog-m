@@ -22,7 +22,7 @@ public class CategoryRepositoryTest extends CategoryTest {
         assertEquals(mockCategory.getName(), insertedCategory.getName());
         assertEquals(mockCategory.getDepth(), insertedCategory.getDepth());
         assertEquals(mockCategory.getOrdering(), insertedCategory.getOrdering());
-        assertEquals(mockCategory.getIsVisible(), insertedCategory.getIsVisible());
+        assertEquals(mockCategory.isVisible(), insertedCategory.isVisible());
         mockCategory = insertedCategory;
     }
 
@@ -47,7 +47,7 @@ public class CategoryRepositoryTest extends CategoryTest {
         mockCategory2.setName("UPDATE_NAME");
         mockCategory2.setDepth(100);
         mockCategory2.setOrdering(100);
-        mockCategory2.setIsVisible(1);
+        mockCategory2.setVisible(true);
 
         // test code
         Category updatedCategory = categoryRepository.save(mockCategory2);
@@ -56,7 +56,7 @@ public class CategoryRepositoryTest extends CategoryTest {
         assertEquals(mockCategory2.getName(), updatedCategory.getName());
         assertEquals(mockCategory2.getDepth(), updatedCategory.getDepth());
         assertEquals(mockCategory2.getOrdering(), updatedCategory.getOrdering());
-        assertEquals(mockCategory2.getIsVisible(), updatedCategory.getIsVisible());
+        assertEquals(mockCategory2.isVisible(), updatedCategory.isVisible());
     }
 
     @Test

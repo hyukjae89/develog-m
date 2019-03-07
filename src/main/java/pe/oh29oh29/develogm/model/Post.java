@@ -46,4 +46,7 @@ public class Post implements Serializable {
     @Column
     private boolean isPrivate;
 
+    @Column
+    private String urlPathName;
+
 }
