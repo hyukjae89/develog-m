@@ -19,11 +19,13 @@ public class Post implements Serializable {
     )
     private String id;
 
-    @Column
-    private String categoryId;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
 
-    @Column
-    private String memberId;
+    @ManyToOne
+    @JoinColumn(name = "memberId")
+    private Member member;
 
     @Column
     private String title;

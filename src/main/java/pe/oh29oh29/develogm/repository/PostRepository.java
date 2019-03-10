@@ -10,7 +10,7 @@ import pe.oh29oh29.develogm.model.Post;
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
 
-    @Modifying
-    @Query("DELETE FROM Post p WHERE p.categoryId = :categoryId")
-    void deletePostsByCategoryId(@Param("categoryId") String categoryId);
+//    @Modifying
+//    @Query("DELETE FROM Post p WHERE p.categoryId = :categoryId")
+//    void deletePostsByCategoryId(@Param("categoryId") String categoryId);
 }

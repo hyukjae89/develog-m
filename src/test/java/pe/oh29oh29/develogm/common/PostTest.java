@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pe.oh29oh29.develogm.model.Post;
+import pe.oh29oh29.develogm.repository.CategoryRepository;
 import pe.oh29oh29.develogm.repository.CommentRepository;
+import pe.oh29oh29.develogm.repository.MemberRepository;
 import pe.oh29oh29.develogm.repository.PostRepository;
 
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ public class PostTest {
     protected Post mockPost;
 
     protected static List<Post> mockPostList;
+
+    @Autowired
+    protected MemberRepository memberRepository;
+
+    @Autowired
+    protected CategoryRepository categoryRepository;
 
     @Autowired
     protected PostRepository postRepository;
