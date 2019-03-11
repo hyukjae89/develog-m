@@ -1,6 +1,7 @@
 package pe.oh29oh29.develogm.model;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "posts")
 @Data
+@ToString
 public class Post implements Serializable {
 
     @Id

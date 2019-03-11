@@ -18,6 +18,6 @@ public class MPostController {
         System.out.println(categoryId);
         System.out.println(categoryName);
         System.out.println(page);
-        return ResponseEntity.ok(postService.getPosts());
+        return ResponseEntity.ok(postService.getPosts(categoryId));
     }
 }
