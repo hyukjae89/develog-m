@@ -1,6 +1,7 @@
 package pe.oh29oh29.develogm.model.response;
 
 import lombok.Data;
+import pe.oh29oh29.develogm.model.Page;
 
 import java.util.List;
 
@@ -26,9 +27,5 @@ public class PostRes {
         private String urlPathName;
     }
 
-    @Data
-    public class Page {
-
-    }
 
 }
