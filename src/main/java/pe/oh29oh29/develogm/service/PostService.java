@@ -22,12 +22,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public PostRes getPosts(String categoryId) {
-        Post examplePost = new Post();
-        Category exampleCategory = new Category();
-        exampleCategory.setId(categoryId);
-        examplePost.setCategory(exampleCategory);
-
-        List<Post> posts = postRepository.findAll(Example.of(examplePost));
+        List<Post> posts = postRepository.findAll(PostSpec.category(categoryId));
         PostRes postRes = new PostRes();
         List<PostRes.PostDetail> postDetailList = new ArrayList();
         posts.forEach(post -> {
