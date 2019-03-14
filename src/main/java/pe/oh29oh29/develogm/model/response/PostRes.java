@@ -1,7 +1,6 @@
 package pe.oh29oh29.develogm.model.response;
 
 import lombok.Data;
-import pe.oh29oh29.develogm.model.Page;
 
 import java.util.List;
 
@@ -10,6 +9,9 @@ public class PostRes {
 
     private List<PostDetail> posts;
     private Page page;
+
+    private PostDetail post;
+    private List<CommentDetail> comments;
 
     @Data
     public static class PostDetail {
@@ -27,5 +29,16 @@ public class PostRes {
         private String urlPathName;
     }
 
+    @Data
+    public static class CommentDetail {
+        private String id;
+        private String postId;
+        private String memberId;
+        private List<CommentDetail> children;
+        private String contents;
+        private String regDate;
+        private String lastUpdateDate;
+        private boolean isDeleted;
+    }
 
 }

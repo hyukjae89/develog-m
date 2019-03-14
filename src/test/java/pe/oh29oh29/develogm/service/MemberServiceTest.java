@@ -1,27 +1,16 @@
 package pe.oh29oh29.develogm.service;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pe.oh29oh29.develogm.common.MemberTest;
 import pe.oh29oh29.develogm.model.Member;
-import pe.oh29oh29.develogm.repository.MemberRepository;
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
 public class MemberServiceTest extends MemberTest {
-
-    @Autowired
-    MemberRepository memberRepository;
-
-    @Before
-    public void setUp() {
-        memberRepository.deleteAll();
-    }
 
     @Test
     public void existId() {

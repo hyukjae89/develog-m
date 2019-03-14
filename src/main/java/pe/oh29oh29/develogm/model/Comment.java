@@ -18,11 +18,13 @@ public class Comment {
     )
     private String id;
 
-    @Column
-    private String postId;
+    @ManyToOne
+    @JoinColumn(name = "postId")
+    private Post post;
 
-    @Column
-    private String memberId;
+    @ManyToOne
+    @JoinColumn(name = "memberId")
+    private Member member;
 
     @Column
     private String parentCommentId;

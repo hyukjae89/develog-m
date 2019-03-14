@@ -16,18 +16,22 @@ public class PostRepositoryTest extends PostTest {
     @Test
     public void t1_insert() {
         // init
-        mockPost.setMember(memberRepository.findAll().get(0));
-        mockPost.setCategory(categoryRepository.findAll().get(0));
+        for (Post mockPost : mockPostList) {
+            mockPost.setMember(memberRepository.findAll().get(0));
+            mockPost.setCategory(categoryRepository.findAll().get(0));
 
-        // test code
-        Post insertedPost = postRepository.save(mockPost);
+            // test code
+            Post insertedPost = postRepository.save(mockPost);
 
-        // verification
-        assertEquals(mockPost.getTitle(), insertedPost.getTitle());
-        assertEquals(mockPost.getMember().getId(), insertedPost.getMember().getId());
-        assertEquals(mockPost.getCategory().getId(), insertedPost.getCategory().getId());
-        assertEquals(mockPost.getContents(), insertedPost.getContents());
-        mockPost = insertedPost;
+            // verification
+            assertEquals(mockPost.getTitle(), insertedPost.getTitle());
+            assertEquals(mockPost.getMember().getId(), insertedPost.getMember().getId());
+            assertEquals(mockPost.getCategory().getId(), insertedPost.getCategory().getId());
+            assertEquals(mockPost.getContents(), insertedPost.getContents());
+        }
+
+
+//        mockPost = insertedPost;
     }
 
     @Test
