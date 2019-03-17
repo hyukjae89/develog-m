@@ -6,13 +6,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import pe.oh29oh29.develogm.model.Comment;
 import pe.oh29oh29.develogm.model.Post;
+import pe.oh29oh29.develogm.model.request.CommentReq;
 import pe.oh29oh29.develogm.model.request.PostReq;
+import pe.oh29oh29.develogm.model.response.CommentRes;
 import pe.oh29oh29.develogm.model.response.PostRes;
-import pe.oh29oh29.develogm.repository.CommentRepository;
 import pe.oh29oh29.develogm.repository.PostRepository;
-import pe.oh29oh29.develogm.repository.specification.CommentSpec;
 import pe.oh29oh29.develogm.repository.specification.PostSpec;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class PostService {
     private PostRepository postRepository;
 
     @Autowired
-    private CommentRepository commentRepository;
+    private CommentService commentService;
 
     public PostRes getPosts(PostReq postReq) {
 
@@ -41,6 +40,7 @@ public class PostService {
             postDetail.setCategoryId(post.getCategory().getId());
             postDetail.setCategoryName(post.getCategory().getName());
             postDetail.setMemberId(post.getMember().getId());
+            postDetail.setTitle(post.getTitle());
             postDetail.setContents(post.getContents());
             postDetail.setDescription(post.getDescription());
             postDetail.setRegDate(post.getRegDate());
@@ -60,7 +60,6 @@ public class PostService {
     public PostRes getPost(PostReq postReq) {
 
         Post post = postRepository.findOne(PostSpec.equalUrlPathName(postReq)).get();
-        List<Comment> comments = commentRepository.findAll(CommentSpec.equalPost(postReq));
 
         PostRes postRes = new PostRes();
         PostRes.PostDetail postDetail = new PostRes.PostDetail();
@@ -68,6 +67,7 @@ public class PostService {
         postDetail.setCategoryId(post.getCategory().getId());
         postDetail.setCategoryName(post.getCategory().getName());
         postDetail.setMemberId(post.getMember().getId());
+        postDetail.setTitle(post.getTitle());
         postDetail.setContents(post.getContents());
         postDetail.setDescription(post.getDescription());
         postDetail.setRegDate(post.getRegDate());
@@ -75,17 +75,10 @@ public class PostService {
         postDetail.setPrivate(post.isPrivate());
         postDetail.setUrlPathName(post.getUrlPathName());
 
-        List<PostRes.CommentDetail> commentDetailList = new ArrayList<>();
-        comments.forEach(comment -> {
-            PostRes.CommentDetail commentDetail = new PostRes.CommentDetail();
-            commentDetail.setId(comment.getId());
-            commentDetail.setContents(comment.getContents());
-            commentDetail.setMemberId(comment.getMember().getId());
-            commentDetail.set
-        });
+        List<CommentRes> commentResList = commentService.getComments(new CommentReq(post.getId()));
 
         postRes.setPost(postDetail);
-        postRes.setComments(comments);
+        postRes.setComments(commentResList);
 
         return postRes;
     }

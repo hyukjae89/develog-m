@@ -7,11 +7,13 @@ import java.util.List;
 @Data
 public class PostRes {
 
+    // 리스트
     private List<PostDetail> posts;
     private Page page;
 
+    // 상세보기
     private PostDetail post;
-    private List<CommentDetail> comments;
+    private List<CommentRes> comments;
 
     @Data
     public static class PostDetail {
@@ -27,18 +29,6 @@ public class PostRes {
         private int views;
         private boolean isPrivate;
         private String urlPathName;
-    }
-
-    @Data
-    public static class CommentDetail {
-        private String id;
-        private String postId;
-        private String memberId;
-        private List<CommentDetail> children;
-        private String contents;
-        private String regDate;
-        private String lastUpdateDate;
-        private boolean isDeleted;
     }
 
 }

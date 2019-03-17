@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import pe.oh29oh29.develogm.common.PostTest;
 import pe.oh29oh29.develogm.model.Post;
+import pe.oh29oh29.develogm.model.request.PostReq;
 import pe.oh29oh29.develogm.model.response.PostRes;
 import pe.oh29oh29.develogm.repository.specification.PostSpec;
 
@@ -23,8 +24,10 @@ public class PostServiceTest extends PostTest {
     public void t2_getPosts() {
         // init
         String categoryId = categoryRepository.findAll().get(0).getId();
+        PostReq postReq = new PostReq();
+        postReq.setCategoryId(categoryId);
 
-        List<Post> posts = postRepository.findAll(PostSpec.category(categoryId));
+        List<Post> posts = postRepository.findAll(PostSpec.equalCategory(postReq));
         PostRes postRes = new PostRes();
         List<PostRes.PostDetail> postDetailList = new ArrayList();
         posts.forEach(post -> {

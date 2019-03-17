@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -26,8 +27,9 @@ public class Comment {
     @JoinColumn(name = "memberId")
     private Member member;
 
-    @Column
-    private String parentCommentId;
+    @ManyToOne
+    @JoinColumn(name = "parentCommentId")
+    private Comment parentComment;
 
     @Column
     private String contents;
@@ -37,4 +39,13 @@ public class Comment {
 
     @Column
     private String lastUpdateDate;
+
+    @Column
+    private boolean isDeleted;
+
+    @Column
+    private int ordering;
+
+    @Column
+    private int subOrdering;
 }
