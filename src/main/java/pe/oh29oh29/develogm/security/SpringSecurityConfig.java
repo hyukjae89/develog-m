@@ -53,24 +53,36 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
-            .and()
-                .formLogin()
-                .loginPage("/member/sign-in")
-                .loginProcessingUrl("/member/sign-in")
-                .successHandler(successHandler())
-                .failureUrl("/member/sign-in")
-                .usernameParameter("id")
-                .passwordParameter("passwd")
-            .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-            .and()
-                // csrf 사용유무 설정
-                // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
-                .csrf();
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            .antMatchers("/**").permitAll();
+
+        http.formLogin()
+            .loginPage("/sign-in")
+            .loginProcessingUrl("/sign-in")
+            .successHandler(successHandler())
+            .failureUrl("/sign-in")
+            .usernameParameter("id")
+            .passwordParameter("passwd")
+            .permitAll();
+
+        http.logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/sign-out"))
+            .logoutSuccessUrl("/")
+            // 인증정보 무효화
+            .clearAuthentication(true)
+            // 세션 무효화
+            .invalidateHttpSession(true);
+
+        http.sessionManagement()
+            // 같은 아이디로 1명만 로그인 할 수 있음
+            .maximumSessions(1)
+            // 신규 로그인 사용자의 로그인이 허용되고, 기존 사용자는 로그아웃
+            .maxSessionsPreventsLogin(false);
+
+        // csrf 사용유무 설정
+        // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
+        http.csrf()
+            .disable();
     }
 
     public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {

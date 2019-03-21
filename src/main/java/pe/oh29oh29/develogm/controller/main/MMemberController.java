@@ -1,11 +1,12 @@
 package pe.oh29oh29.develogm.controller.main;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.oh29oh29.develogm.model.Member;
-import pe.oh29oh29.develogm.model.response.MemberResCode;
-import pe.oh29oh29.develogm.model.response.Response;
+import pe.oh29oh29.develogm.model.request.MemberReq;
+import pe.oh29oh29.develogm.model.response.MemberRes;
 import pe.oh29oh29.develogm.service.MemberService;
 
 @RestController
@@ -15,26 +16,28 @@ public class MMemberController {
     MemberService memberService;
 
     @PostMapping("/sign-up")
-    public String signUp(Member member) {
+    public ResponseEntity<MemberRes> signUp(@RequestBody Member member) {
+
+        MemberRes memberRes = new MemberRes();
+
         memberService.signUp(member);
-        return "redirect:/";
+
+        return ResponseEntity.ok(memberRes);
     }
 
     @PostMapping("/sign-in")
-    public String signIn() {
-        return null;
+    public ResponseEntity<MemberRes> signIn(MemberReq memberReq) {
+        return ResponseEntity.ok(memberService.signIn(memberReq));
     }
 
     @GetMapping("/check-id")
-    public ResponseEntity<Response> checkId(@RequestParam String id) {
-        int code;
-        if (memberService.existId(id)) {
-            code = MemberResCode.EXIST_ID;
-        } else {
-            code = MemberResCode.NOT_EXIST_ID;
-        }
+    public ResponseEntity<MemberRes> checkId(MemberReq memberReq) {
+        return ResponseEntity.ok(memberService.existId(memberReq));
+    }
 
-        return ResponseEntity.ok(new Response(code));
+    @PostMapping("/sign-out")
+    public ResponseEntity signOut(@RequestBody MemberReq memberReq) {
+        return ResponseEntity.ok().build();
     }
 
 }
