@@ -7,20 +7,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import pe.oh29oh29.develogm.model.MemberForSecurity;
 import pe.oh29oh29.develogm.service.MemberService;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,13 +21,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        return new LoginSuccessHandler("/");
-    }
+    @Autowired
+    private SignInSuccessHandler signInSuccessHandler;
 
     @Autowired
-    MemberService memberService;
+    private SignInFailureHandler signInFailureHandler;
+
+    @Autowired
+    private SignOutSuccessHandler signOutSuccessHandler;
+
+    @Autowired
+    private MemberService memberService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -59,19 +54,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
             .loginPage("/sign-in")
             .loginProcessingUrl("/sign-in")
-            .successHandler(successHandler())
-            .failureUrl("/sign-in")
             .usernameParameter("id")
             .passwordParameter("passwd")
+            .successHandler(signInSuccessHandler)
+            .failureHandler(signInFailureHandler)
             .permitAll();
 
         http.logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/sign-out"))
-            .logoutSuccessUrl("/")
+            .logoutSuccessHandler(signOutSuccessHandler)
             // 인증정보 무효화
             .clearAuthentication(true)
             // 세션 무효화
-            .invalidateHttpSession(true);
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID");
 
         http.sessionManagement()
             // 같은 아이디로 1명만 로그인 할 수 있음
@@ -83,20 +79,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
         http.csrf()
             .disable();
-    }
 
-    public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-        public LoginSuccessHandler(String defaultTargetUrl) {
-            setDefaultTargetUrl(defaultTargetUrl);
-        }
-
-        @Override
-        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-            HttpSession session = request.getSession();
-            MemberForSecurity member = (MemberForSecurity) authentication.getPrincipal();
-            session.setAttribute("user", member.getUsername());
-            super.onAuthenticationSuccess(request, response, authentication);
-        }
+        http.addFilterAfter(new SessionCheckFilter(), BasicAuthenticationFilter.class);
     }
 
 }

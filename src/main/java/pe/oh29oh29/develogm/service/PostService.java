@@ -14,6 +14,8 @@ import pe.oh29oh29.develogm.model.response.PostRes;
 import pe.oh29oh29.develogm.repository.PostRepository;
 import pe.oh29oh29.develogm.repository.specification.PostSpec;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class PostService {
         Page<Post> posts = postRepository.findAll(spec, pageable);
 
         List<PostRes.PostDetail> postDetailList = new ArrayList<>();
+
         posts.forEach(post -> {
             PostRes.PostDetail postDetail = new PostRes.PostDetail();
             postDetail.setId(post.getId());
@@ -83,8 +86,11 @@ public class PostService {
         return postRes;
     }
 
-    public void savePost(Post post) {
-        postRepository.save(post);
+    public Post savePost(Post post) {
+        String nowDateTime = LocalDateTime.now(ZoneId.of("UTC")).toString();
+        post.setRegDate(nowDateTime);
+        post.setLastUpdateDate(nowDateTime);
+        return postRepository.save(post);
     }
 
     public void deletePost(PostReq postReq) {

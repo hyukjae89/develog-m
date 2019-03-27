@@ -1,10 +1,12 @@
 package pe.oh29oh29.develogm.model.response;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString
 public class PostRes {
 
     // 리스트

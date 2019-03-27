@@ -2,9 +2,8 @@ package pe.oh29oh29.develogm.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pe.oh29oh29.develogm.model.Post;
 import pe.oh29oh29.develogm.model.request.PostReq;
 import pe.oh29oh29.develogm.model.response.PostRes;
 import pe.oh29oh29.develogm.service.PostService;
@@ -24,6 +23,11 @@ public class MPostController {
     @GetMapping("/detail")
     public ResponseEntity<PostRes> getPost(PostReq postReq) {
         return ResponseEntity.ok(postService.getPost(postReq));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Post> addPost(@RequestBody Post post) {
+        return ResponseEntity.ok(postService.savePost(post));
     }
 
 }
