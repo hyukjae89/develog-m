@@ -15,6 +15,11 @@ public class MPostController {
     @Autowired
     PostService postService;
 
+    @PostMapping("")
+    public ResponseEntity<Post> addPost(@RequestBody Post post) {
+        return ResponseEntity.ok(postService.savePost(post));
+    }
+
     @GetMapping("")
     public ResponseEntity<PostRes> getPosts(PostReq postReq) {
         return ResponseEntity.ok(postService.getPosts(postReq));
@@ -25,9 +30,10 @@ public class MPostController {
         return ResponseEntity.ok(postService.getPost(postReq));
     }
 
-    @PostMapping("")
-    public ResponseEntity<Post> addPost(@RequestBody Post post) {
-        return ResponseEntity.ok(postService.savePost(post));
+    @DeleteMapping("")
+    public ResponseEntity deletePost(PostReq postReq) {
+        postService.deletePost(postReq);
+        return ResponseEntity.ok().build();
     }
 
 }

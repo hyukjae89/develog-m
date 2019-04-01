@@ -9,6 +9,8 @@ import pe.oh29oh29.develogm.model.response.CategoryRes;
 import pe.oh29oh29.develogm.model.response.Response;
 import pe.oh29oh29.develogm.service.CategoryService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/category")
 public class ACategoryController {
@@ -16,22 +18,26 @@ public class ACategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("")
-    public ResponseEntity<Response> categoryManagementView(Model model) {
-        model.addAttribute("categories", categoryService.getCategories());
-        return ResponseEntity.ok(new Response(CategoryRes.Code.SUCCESS));
+    @PostMapping("")
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        return ResponseEntity.ok(categoryService.addCategory(category));
     }
 
-    @PostMapping("")
-    public ResponseEntity<Response> addCategory(Category category) {
-        System.out.println(category.getName());
-        categoryService.addCategory(category);
-        return ResponseEntity.ok(new Response(CategoryRes.Code.SUCCESS));
+    @GetMapping("")
+    public ResponseEntity<List<CategoryRes>> getCategories() {
+        return ResponseEntity.ok(categoryService.getCategories());
+    }
+
+    @PatchMapping("")
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
+        return ResponseEntity.ok(categoryService.updateCategory(category));
     }
 
     @DeleteMapping("")
-    public ResponseEntity<Response> deleteCategory(String id) {
+    public ResponseEntity deleteCategory(String id) {
         categoryService.deleteCategory(id);
-        return ResponseEntity.ok(new Response(CategoryRes.Code.SUCCESS));
+        return ResponseEntity.ok().build();
     }
+
+
 }

@@ -36,8 +36,8 @@ public class CategoryService {
         return categoryResList;
     }
 
-    public void addCategory(Category category) {
-        categoryRepository.save(category);
+    public Category addCategory(Category category) {
+        return categoryRepository.save(category);
     }
 
     @Transactional
@@ -46,8 +46,8 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public void updateCategory(Category category) {
-        categoryRepository.save(category);
+    public Category updateCategory(Category category) {
+        return categoryRepository.save(category);
     }
 
 }

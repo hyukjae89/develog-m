@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 import pe.oh29oh29.develogm.model.Post;
 import pe.oh29oh29.develogm.model.request.CommentReq;
 import pe.oh29oh29.develogm.model.request.PostReq;
@@ -15,7 +16,7 @@ import pe.oh29oh29.develogm.repository.PostRepository;
 import pe.oh29oh29.develogm.repository.specification.PostSpec;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +47,8 @@ public class PostService {
             postDetail.setTitle(post.getTitle());
             postDetail.setContents(post.getContents());
             postDetail.setDescription(post.getDescription());
-            postDetail.setRegDate(post.getRegDate());
-            postDetail.setLastUpdateDate(post.getLastUpdateDate());
+            postDetail.setRegDate(post.getRegDate().substring(0, post.getRegDate().length() - 3));
+            postDetail.setLastUpdateDate(post.getLastUpdateDate().substring(0, post.getRegDate().length() - 3));
             postDetail.setPrivate(post.isPrivate());
             postDetail.setUrlPathName(post.getUrlPathName());
             postDetailList.add(postDetail);
@@ -73,8 +74,8 @@ public class PostService {
         postDetail.setTitle(post.getTitle());
         postDetail.setContents(post.getContents());
         postDetail.setDescription(post.getDescription());
-        postDetail.setRegDate(post.getRegDate());
-        postDetail.setLastUpdateDate(post.getLastUpdateDate());
+        postDetail.setRegDate(post.getRegDate().substring(0, post.getRegDate().length() - 3));
+        postDetail.setLastUpdateDate(post.getLastUpdateDate().substring(0, post.getRegDate().length() - 3));
         postDetail.setPrivate(post.isPrivate());
         postDetail.setUrlPathName(post.getUrlPathName());
 
@@ -87,8 +88,11 @@ public class PostService {
     }
 
     public Post savePost(Post post) {
-        String nowDateTime = LocalDateTime.now(ZoneId.of("UTC")).toString();
-        post.setRegDate(nowDateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String nowDateTime = LocalDateTime.now().format(formatter);
+        if (StringUtils.isEmpty(post.getRegDate())) {
+            post.setRegDate(nowDateTime);
+        }
         post.setLastUpdateDate(nowDateTime);
         return postRepository.save(post);
     }
@@ -98,7 +102,7 @@ public class PostService {
     }
 
     public void deletePostsByCategory(String categoryId) {
-//        postRepository.deletePostsByCategoryId(categoryId);
+        postRepository.deletePostsByCategoryId(categoryId);
     }
 
 }

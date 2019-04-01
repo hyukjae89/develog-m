@@ -38,7 +38,7 @@ public class Post implements Serializable {
     @Column
     private String contents;
 
-    @Column
+    @Column(updatable= false)
     private String regDate;
 
     @Column

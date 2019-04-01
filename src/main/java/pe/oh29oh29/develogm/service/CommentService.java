@@ -42,12 +42,16 @@ public class CommentService {
         return commentResList;
     }
 
-    public void saveComment(Comment comment) {
-        commentRepository.save(comment);
+    public Comment saveComment(Comment comment) {
+        return commentRepository.save(comment);
     }
 
     public void deleteComment(String id) {
         commentRepository.deleteById(id);
+    }
+
+    public void deleteCommentsByPost(String postId) {
+        commentRepository.deleteCommentsByPost(postId);
     }
 
 }
