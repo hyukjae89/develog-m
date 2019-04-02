@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -18,6 +19,7 @@ import pe.oh29oh29.develogm.repository.specification.PostSpec;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,7 +33,7 @@ public class PostService {
 
     public PostRes getPosts(PostReq postReq) {
 
-        Pageable pageable = PageRequest.of(postReq.getPage() - 1, 5);
+        Pageable pageable = PageRequest.of(postReq.getPage() - 1, 5, new Sort(Sort.Direction.ASC, Arrays.asList("regDate", "title")));
         Specification<Post> spec = PostSpec.equalCategory(postReq);
 
         Page<Post> posts = postRepository.findAll(spec, pageable);
